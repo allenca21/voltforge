@@ -1,50 +1,87 @@
-# Welcome to your Expo app 👋
+# VoltForge
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A field calculator for electricians. Load calcs, transformer wiring, conduit
+bending, and the fraction math that comes with working in inches.
 
-## Get started
+**[App Store](https://apps.apple.com/us/app/voltforge/id6762475628)** ·
+[Google Play](https://play.google.com/store/apps/details?id=com.allenca21.voltforge)
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## Why
 
-2. Start the app
+An apprentice electrician in my family was doing conduit offset math on a phone
+notepad, in a crawlspace, with gloves on. Every calculator app I looked at was
+either a generic scientific calculator or a web page that assumed a desk and a
+steady connection.
 
-   ```bash
-   npx expo start
-   ```
+VoltForge is built for the actual conditions: one-handed, gloved, bad light,
+no signal. Big targets, dark mode that works outdoors at dusk, everything
+computed on device.
 
-In the output, you'll find options to open the app in a
+He has been the test user throughout, which is why the interaction design
+changed more than the math did.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## What's in it
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+**Load Calculator** — NEC Article 220 service sizing. Demand factors applied by
+load category, amps or watts input, single or three phase, and recommended
+service size at 125%. Jobs are named and persist, so you can put one down and
+come back to it. Nameplate photo capture for equipment you'd otherwise have to
+write down and transcribe wrong.
 
-## Get a fresh project
+**Transformer** — Seven wiring configurations with SVG diagrams, sized for
+reading on a phone rather than shrunk from a print reference.
 
-When you're ready, run:
+**Conduit Bending** — Offsets, saddles, and the geometry that goes with them.
 
-```bash
-npm run reset-project
+**Pull Tension** — Segment-by-segment tension through a run.
+
+**Fractions** — Inch fraction arithmetic, because the tape measure doesn't speak
+decimals.
+
+**NEC Reference** — Tables you'd otherwise be flipping to.
+
+## Built with
+
+- **React Native / Expo**, TypeScript
+- **Stack navigation** off a home screen launchpad, with a responsive grid that
+  goes two, three, or four columns by viewport
+- **Themed styling** — `DARK` and `LIGHT` palettes in `theme.ts`, consumed
+  through a store context, with a shared `makeStyles(C)` helper so every screen
+  pulls the active palette rather than hardcoding
+- **react-native-svg** for the wiring and bending diagrams
+- **RevenueCat** for Pro entitlements, platform-aware so one `pro` entitlement
+  covers both stores
+- **EAS Build & Submit** for the pipeline
+
+No account, no backend, no network dependency. Calculations run on device and
+nothing leaves the phone. The camera is used only for nameplate photos, stored
+locally.
+
+## Structure
+
+```
+App.tsx                 Stack navigator and screen registry
+src/screens/            One file per tool
+src/theme.ts            DARK / LIGHT palettes
+src/styles.ts           makeStyles(C) shared style factory
+src/store.tsx           Theme and entitlement context
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Status
 
-## Learn more
+Live on the App Store and Google Play. Actively maintained.
 
-To learn more about developing your project with Expo, look at the following resources:
+Source is published for portfolio purposes.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+© 2026 Clark Allen. All rights reserved.
 
-Join our community of developers creating universal apps.
+This source is made publicly viewable to demonstrate my work. It is not licensed
+for reuse, redistribution, or derivative works.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+VoltForge is a calculation aid. It is not a substitute for the National
+Electrical Code, local amendments, or a licensed electrician's judgment. Verify
+against the current code before relying on any result.
